@@ -12,6 +12,10 @@ class MoveData {
   const MoveData({required this.from, required this.to, this.moveAsFolder = false});
 }
 
+const List<MoveData> movedatas = [
+  MoveData(from: ['dyn', 'audio', 'sound_beta_2'], to: [''], moveAsFolder: true),
+];
+
 void logMove(String path) {
   print('[move] moved $path');
 }
@@ -59,10 +63,6 @@ void _moveAndDelete(MoveData data) {
     }
   }
 }
-
-const List<MoveData> movedatas = [
-  MoveData(from: ['dyn', 'audio', 'sound_beta_2'], to: [''], moveAsFolder: true),
-];
 
 void moveAssetsAndConvert() {
   for (var data in movedatas) {

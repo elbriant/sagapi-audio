@@ -82,6 +82,8 @@ void main(List<String> arguments) async {
   final tmpFolder = Directory(p.join(Directory.current.path, tmpDir));
   final bundleFolder = Directory(p.join(Directory.current.path, bundlesDir));
 
+  moveAssetsAndConvert();
+
   while (totalTasks.isNotEmpty) {
     print("\nStarting to process. $processedTasks/$totalTasksLength");
 
@@ -108,8 +110,8 @@ void main(List<String> arguments) async {
 
     // cleaning up just to be sure
     print('cleaning');
-    await tmpFolder.delete(recursive: true);
-    await bundleFolder.delete(recursive: true);
+    // await tmpFolder.delete(recursive: true);
+    // await bundleFolder.delete(recursive: true);
 
     // push current assets to repo
     /*

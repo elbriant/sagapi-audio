@@ -31,10 +31,10 @@ jobs:
           sudo apt-get remove --purge -y dotnet* || true
           sudo apt-get autoremove -y
           sudo rm -rf /usr/share/dotnet /etc/dotnet
-      - name: Install .NET 6.0
+      - name: Install .NET 8.0
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 6.0.x
+          dotnet-version: 8.0.x
       - name: Install dart sdk
         uses: dart-lang/setup-dart@v1
       - name: Prepare environment

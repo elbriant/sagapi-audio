@@ -23,7 +23,7 @@ Future<void> downloadAKstudio({bool forceUpdate = false}) async {
     final url =
         (data['assets'] as List).firstWhere(
           (element) =>
-              (element['name'] as String).contains(RegExp(r'net6', caseSensitive: false)) &&
+              (element['name'] as String).contains(RegExp(r'net8', caseSensitive: false)) &&
               (element['name'] as String).contains(RegExp(r'portable', caseSensitive: false)),
         )['browser_download_url'];
 
