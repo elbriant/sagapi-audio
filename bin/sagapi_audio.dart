@@ -19,8 +19,8 @@ void main(List<String> arguments) async {
   final bool forceUpdate = arguments.contains('--force');
 
   // checkout assets branch
-  // Process.runSync('git', ["fetch", "--depth=1", "origin", "$branchName:$branchName"]);
-  // Process.runSync('git', ["checkout", branchName]);
+  Process.runSync('git', ["fetch", "--depth=1", "origin", "$branchName:$branchName"]);
+  Process.runSync('git', ["checkout", branchName]);
 
   final config = jsonDecode(
     jsonDecode((await http.get(Uri.parse(cnNetworkConfigUrl))).body)['content'],
@@ -82,8 +82,6 @@ void main(List<String> arguments) async {
   final tmpFolder = Directory(p.join(Directory.current.path, tmpDir));
   final bundleFolder = Directory(p.join(Directory.current.path, bundlesDir));
 
-  moveAssetsAndConvert();
-
   while (totalTasks.isNotEmpty) {
     print("\nStarting to process. $processedTasks/$totalTasksLength");
 
@@ -106,15 +104,14 @@ void main(List<String> arguments) async {
     processedTasks = totalTasksLength - totalTasks.length;
 
     print('moving files');
-    moveAssetsAndConvert();
+    await moveAssetsAndConvert();
 
     // cleaning up just to be sure
     print('cleaning');
-    // await tmpFolder.delete(recursive: true);
-    // await bundleFolder.delete(recursive: true);
+    await tmpFolder.delete(recursive: true);
+    await bundleFolder.delete(recursive: true);
 
     // push current assets to repo
-    /*
     print('pushing to git');
     await stdout.flush();
     Process.runSync('git', ['add', assetsDir]);
@@ -140,19 +137,16 @@ void main(List<String> arguments) async {
     Process.runSync('git', ['checkout', branchName]);
     Process.runSync('git', ['reflog', 'expire', '--expire=now', '--all']);
     Process.runSync('git', ['gc', '--prune=now']);
-    */
   }
 
   await bundleFolder.create();
   await File(p.join(bundleFolder.path, 'hot_update_list.json')).writeAsBytes(newDataList.bodyBytes);
 
   // push final commit
-  /*
   Process.runSync('git', ['add', bundlesDir]);
   Process.runSync('git', ['commit', '-m', 'update $resVersion final hot_update_list']);
   Process.runSync('git', ['push', 'origin', branchName]);
   Process.runSync('git', ['checkout', 'master']);
-  */
   print("updated ${newHotUpdateList['versionId']}");
 }
 

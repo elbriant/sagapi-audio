@@ -2,10 +2,8 @@
 # Created by `dart pub`
 .dart_tool/
 
-assets/
-bundles/
+# development
 ArknightsStudioCLI/
-
 bundles/
 tmp/
 audio/
