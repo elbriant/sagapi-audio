@@ -5,7 +5,7 @@ on:
   schedule:
     - cron: "* 0,12 * * *"
   push:
-    branches: [master]
+    branches: [main]
 
 concurrency:
   group: "${{ github.ref }}"
@@ -20,7 +20,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          ref: "master"
+          ref: "main"
       - name: Free Disk Space (Ubuntu)
         uses: jlumbroso/free-disk-space@main
         with:

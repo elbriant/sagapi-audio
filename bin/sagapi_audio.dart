@@ -116,7 +116,7 @@ void main(List<String> arguments) async {
     await stdout.flush();
     Process.runSync('git', ['add', assetsDir]);
     // not sure what this does
-    var result = Process.runSync('git', ['diff', '--cached', '--name-only', 'assets']);
+    var result = Process.runSync('git', ['diff', '--cached', '--name-only', branchName]);
     print(result.stdout);
     // if ((result.stdout as String).trim().isEmpty) {
     //   continue;
@@ -146,7 +146,7 @@ void main(List<String> arguments) async {
   Process.runSync('git', ['add', bundlesDir]);
   Process.runSync('git', ['commit', '-m', 'update $resVersion final hot_update_list']);
   Process.runSync('git', ['push', 'origin', branchName]);
-  Process.runSync('git', ['checkout', 'master']);
+  Process.runSync('git', ['checkout', 'main']);
   print("updated ${newHotUpdateList['versionId']}");
 }
 
