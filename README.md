@@ -1,6 +1,6 @@
 # What contains this repo
 
-- All audio assets
+- All voice assets
 
 ## Script based on [ArknightsAssets2 by ArknightsAssets](https://github.com/ArknightsAssets/ArknightsAssets2/tree/master)
 
