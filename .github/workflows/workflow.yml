@@ -44,6 +44,7 @@ jobs:
           git config http.postBuffer 2147483648
           if [[ $GITHUB_EVENT_NAME == 'workflow_dispatch' ]]; then echo "FORCE=--force" >> $GITHUB_ENV; fi
           dart pub get
+          sudo apt-get update
           sudo apt-get install -y ffmpeg
       - name: Update assets
         run: dart run sagapi_audio ${{ env.FORCE }}
